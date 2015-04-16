@@ -1,3 +1,11 @@
+//17.04.2015
+// Macro to align images in a folder by drawing a line
+// Author: Philipp Liehm, University of St Andrews
+// Requirements:
+// Two images which can be aligned easily (e.g. grid)
+// folder with images which should be aligned
+
+
 // open reference image
 // draw line between two features which are far appart from each other
 path_ref = File.openDialog("Choose the reference file");
@@ -46,13 +54,13 @@ selectImage(img_reference);
 	exit("This macro requires a straight line selection");
 	
 
-print(x11,y11,x12,y12);
-print(w1, h1);
+//print(x11,y11,x12,y12);
+//print(w1, h1);
 // open on of the images to calibrate
 // draw line between two features which are far appart from each other
 
-print(x21,y21,x22,y22);
-print(w2, h2);
+//print(x21,y21,x22,y22);
+//print(w2, h2);
 
 dx1 = x12-x11;
 dy1 = y12-y11;
@@ -65,15 +73,15 @@ beta = atan(dy2/dx2);
 gamma_rad = beta-alpha;
 gamma_deg = gamma_rad*180/PI;
 
-print("dx1: ", dx1);
-print("dx2: ", dx2);
-print("dy1: ", dy1);
-print("dy2: ", dy2);
+//print("dx1: ", dx1);
+//print("dx2: ", dx2);
+//print("dy1: ", dy1);
+//print("dy2: ", dy2);
 
-print("alpha: ",alpha);
-print("beta: ", beta);
-print("gamma_rad: ",gamma_rad);
-print("gamma_deg: ",gamma_deg);
+//print("alpha: ",alpha);
+//print("beta: ", beta);
+//print("gamma_rad: ",gamma_rad);
+//print("gamma_deg: ",gamma_deg);
 
 // rotate calib image
 selectImage(img_calib);
@@ -89,17 +97,17 @@ x32 = (x22 - w2/2)*cos(gamma_rad) - (h2/2-y22)*sin(gamma_rad) + w2/2;
 y31 = -((x21 - w2/2)*sin(gamma_rad) + (h2/2-y21)*cos(gamma_rad)) + h2/2;
 y32 = -((x22 - w2/2)*sin(gamma_rad) + (h2/2-y22)*cos(gamma_rad)) + h2/2;
 
-print("new coordinates x31, x32, y31, y32:", x31,x32,y31,y32);
+//print("new coordinates x31, x32, y31, y32:", x31,x32,y31,y32);
 
 dx3 = abs(x31-x32);
 dy3 = abs(y31-y32);
 
-print("new line dimensions are: ", dx3,dy3);
+//print("new line dimensions are: ", dx3,dy3);
 // calculate new dimensions
 w3 = abs(w2*dx1/dx3);
 h3 = abs(h2*dy1/dy3);
 
-print("new width and height are:", w3,h3);
+//print("new width and height are:", w3,h3);
 run("Size...", "width="+w3+" height="+h3+" average interpolation=Bilinear");
 
 // calculate translation
@@ -107,7 +115,7 @@ run("Size...", "width="+w3+" height="+h3+" average interpolation=Bilinear");
 x_t = x11-abs(x31*dx1/dx3);
 y_t = y11-abs(y31*dy1/dy3);
 
-print("translate with x_t and y_t:", x_t, y_t);
+//print("translate with x_t and y_t:", x_t, y_t);
 
 run("Translate...", "x="+x_t+" y="+y_t+" interpolation=None");
 
@@ -136,7 +144,7 @@ Dialog.show();
 
 convert = Dialog.getCheckbox();
 
-print(convert);
+//print(convert);
 
 setBatchMode(true);
 list=getFileList(path_calib); 
